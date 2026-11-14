@@ -127,12 +127,13 @@ st.subheader("2. Pengaruh Musim & Kondisi Cuaca terhadap Penyewaan Harian")
 
 fig2, axes2 = plt.subplots(1, 2, figsize=(16, 5.5))
 
+WARNA_UTAMA = "#1f77b4"  # Satu warna 
+
 # Grafik Kiri: Musim
 urutan_musim = ["Fall", "Summer", "Winter", "Spring"]
 musim_avg = filtered_day.groupby("season")["cnt"].mean().reindex(urutan_musim, fill_value=0).reset_index()
-warna_musim = ["#1f77b4", "#4a90d9", "#7fb3e6", "#b3d4f2"]
 
-bars1 = axes2[0].bar(musim_avg["season"], musim_avg["cnt"], color=warna_musim, width=0.55)
+bars1 = axes2[0].bar(musim_avg["season"], musim_avg["cnt"], color=WARNA_UTAMA, width=0.55)
 axes2[0].set_title("Rata-rata Penyewaan Berdasarkan Musim", fontsize=12, fontweight="bold")
 axes2[0].set_xlabel("Musim")
 axes2[0].set_ylabel("Rata-rata Penyewaan per Hari")
@@ -142,9 +143,8 @@ axes2[0].set_ylim(0, max(musim_avg["cnt"].max() * 1.18, 100))
 # Grafik Kanan: Cuaca
 urutan_cuaca = ["Cerah / Berawan", "Berkabut / Mendung", "Hujan / Salju Ringan"]
 cuaca_avg = filtered_day.groupby("weathersit")["cnt"].mean().reindex(urutan_cuaca, fill_value=0).reset_index()
-warna_cuaca = ["#2ca02c", "#ffbb78", "#d62728"]
 
-bars2 = axes2[1].bar(cuaca_avg["weathersit"], cuaca_avg["cnt"], color=warna_cuaca, width=0.5)
+bars2 = axes2[1].bar(cuaca_avg["weathersit"], cuaca_avg["cnt"], color=WARNA_UTAMA, width=0.5)
 axes2[1].set_title("Rata-rata Penyewaan Berdasarkan Kondisi Cuaca", fontsize=12, fontweight="bold")
 axes2[1].set_xlabel("Kondisi Cuaca")
 axes2[1].bar_label(bars2, fmt="%.0f", padding=4, fontweight="bold")
